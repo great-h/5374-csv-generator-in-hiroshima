@@ -98,7 +98,7 @@ module Hiroshima5374::AreaDays
       end
 
       def resource(first,second)
-        nil
+        '20150101'
       end
 
       def area(tds)
@@ -113,19 +113,19 @@ module Hiroshima5374::AreaDays
       end
 
       def etc(first, second)
-        nil
+        '20150101'
       end
 
       def big(first, second)
-        nil
+        '20150101'
       end
 
       def etc(first, second)
-        nil
+        '20150101'
       end
 
       def unflammable(first, second)
-        nil
+        '20150101'
       end
   end
 end
