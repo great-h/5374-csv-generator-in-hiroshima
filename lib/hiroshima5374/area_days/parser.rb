@@ -132,7 +132,7 @@ module Hiroshima5374::AreaDays
             Time.new(year,n,day).strftime("%Y%m%d")
           end
           [date.call(first.shift),date.call(second.shift)]
-        end.flatten.join(' ')
+        end.flatten.push('*1').join(' ')
       end
 
       def unflammable(first, second)
