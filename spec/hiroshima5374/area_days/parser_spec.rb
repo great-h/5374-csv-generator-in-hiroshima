@@ -22,5 +22,10 @@ describe Parser do
       flammbale = subject.first[2]
       expect(flammbale).to eq('月 木')
     end
+
+    it 'petbottle' do
+      petbottle = subject.first[3]
+      expect(petbottle).to eq('火')
+    end
   end
 end
