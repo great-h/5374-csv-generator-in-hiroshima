@@ -6,6 +6,7 @@ module Hiroshima5374::AreaDays
     def initialize(file)
       @file = file
       @flammable_count = 0
+      @petbottle_count = 0
     end
 
     def areas
@@ -81,33 +82,48 @@ module Hiroshima5374::AreaDays
         @flammable_count -= 1
         @flammable
       end
-    end
 
-    def petbottle(tds)
-      nil
-    end
+      def petbottle(tds)
+        if @petbottle_count == 0
+          petbottle = tds[0]
+          @petbottle_count = petbottle.attributes["rowspan"].value.to_i / 2
+          @petbottle = petbottle.text.gsub(/曜日/,'')
+            .gsub(/[^月火水木金土日]/,'')
+          tds.shift
+        end
+        @petbottle_count -= 1
+        @petbottle
+      end
 
-    def resource(first,second)
-      nil
-    end
+      def resource(first,second)
+        nil
+      end
 
-    def area(tds)
-      nil
-    end
+      def area(tds)
+        tds[14].children.map do |element|
+          case element
+          when Nokogiri::XML::Text
+            element.text.strip
+          when Nokogiri::XML::Element
+            ' '
+          end
+        end.join
+      end
 
-    def etc(first, second)
-      nil
-    end
+      def etc(first, second)
+        nil
+      end
 
-    def big(first, second)
-      nil
-    end
+      def big(first, second)
+        nil
+      end
 
-    def etc(first, second)
-      nil
-    end
+      def etc(first, second)
+        nil
+      end
 
-    def unflammable(first, second)
-      nil
-    end
+      def unflammable(first, second)
+        nil
+      end
+  end
 end

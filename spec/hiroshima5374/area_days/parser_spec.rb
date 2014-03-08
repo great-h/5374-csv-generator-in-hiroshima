@@ -13,6 +13,11 @@ describe Parser do
       expect(counts.reduce(:+)).to eq(100)
     end
 
+    it 'area' do
+      flammbale = subject.first[0]
+      expect(flammbale).to eq('舟入南2丁目、3丁目、6丁目 西川口町')
+    end
+
     it 'flammable' do
       flammbale = subject.first[2]
       expect(flammbale).to eq('月 木')
