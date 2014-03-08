@@ -3,6 +3,8 @@ require 'open-uri'
 
 module Hiroshima5374::AreaDays
   class Parser
+    WEEK_DAYS = '月火水木金土日'.freeze
+
     def initialize(file)
       @file = file
       @flammable_count = 0
@@ -73,7 +75,7 @@ module Hiroshima5374::AreaDays
           flammable = tds[0]
           @flammable_count = flammable.attributes["rowspan"].value.to_i / 2
           @flammable = flammable.text.gsub(/曜日/,'')
-            .gsub(/[^月火水木金土日]/,'')
+            .gsub(/[^#{WEEK_DAYS}]/,'')
             .each_char
             .to_a
             .join(' ')
@@ -88,7 +90,7 @@ module Hiroshima5374::AreaDays
           petbottle = tds[0]
           @petbottle_count = petbottle.attributes["rowspan"].value.to_i / 2
           @petbottle = petbottle.text.gsub(/曜日/,'')
-            .gsub(/[^月火水木金土日]/,'')
+            .gsub(/[^#{WEEK_DAYS}]/,'')
           tds.shift
         end
         @petbottle_count -= 1
