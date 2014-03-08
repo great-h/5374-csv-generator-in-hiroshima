@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+$: << File.join(File.dirname(__FILE__),"..","lib")
+
+require 'hiroshima5374'
+Hiroshima5374::AreaDays::CSVCreator.create
