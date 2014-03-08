@@ -29,7 +29,7 @@ module Hiroshima5374::AreaDays
         unflammable = unflammable(third,fourth)
         [
          area,
-         '',
+         nil, # center
          flammable,
          petbottle,
          petbottle,
