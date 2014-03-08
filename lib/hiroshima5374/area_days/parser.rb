@@ -128,7 +128,7 @@ module Hiroshima5374::AreaDays
         months.map do |n|
           year += 1 if n == 1
           date = proc do |day|
-            day = day.text.strip
+            day = day.text.gsub(/[^[:digit:]]/,'')
             Time.new(year,n,day).strftime("%Y%m%d")
           end
           [date.call(first.shift),date.call(second.shift)]
