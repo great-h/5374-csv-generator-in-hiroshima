@@ -1,10 +1,9 @@
-require 'hiroshima5374'
+require 'spec_helper'
 
 include Hiroshima5374::AreaDays
 
 describe CSVCreator do
-  spec_root = File.join(File.dirname(__FILE__), "..", "..")
-  sample_html = File.join(spec_root, "data", "index.html")
+
   csv_file = File.join(spec_root, "data", "area_days.csv")
 
   before :each do
