@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-include Hiroshima5374::AreaDays
+include Hiroshima5374
 
-describe Parser do
+describe AreaDays::Parser do
   describe '#areas' do
-    subject { Parser.new('中区', sample_html).areas }
+    subject { AreaDays::Parser.new('中区', area_days_sample_html).areas }
     it('10 rows') { expect(subject.size).to eq(10) }
     it '10x10' do
       counts = subject.map do |area|

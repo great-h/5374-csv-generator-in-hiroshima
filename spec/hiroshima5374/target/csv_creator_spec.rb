@@ -2,9 +2,9 @@ require 'spec_helper'
 
 include Hiroshima5374
 
-describe AreaDays::CSVCreator do
+describe Target::CSVCreator do
 
-  csv_file = File.join(spec_root, "data", "area_days.csv")
+  csv_file = File.join(spec_root, "data", "target.csv")
 
   before :each do
     FileUtils.cd spec_root
@@ -18,8 +18,8 @@ describe AreaDays::CSVCreator do
   end
 
   describe '#create' do
-    subject { AreaDays::CSVCreator.new([['区',area_days_sample_html]]).create }
-    it 'area_days.csv が作成される' do
+    subject { Target::CSVCreator.new([target_sample_html]).create }
+    it 'target.csv が作成される' do
       subject
       expect(File.exist?(csv_file)).to be_true
     end
