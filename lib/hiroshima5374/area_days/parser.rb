@@ -118,7 +118,21 @@ module Hiroshima5374::AreaDays
       end
 
       def big(first, second)
-        '20150101'
+        time = Time.now
+        month = time.month
+        year = time.year
+        if month < 4
+          year -= 1
+        end
+        months = (4..12).to_a + (1..3).to_a
+        months.map do |n|
+          year += 1 if n == 1
+          date = proc do |day|
+            day = day.text.strip
+            Time.new(year,n,day).strftime("%Y%m%d")
+          end
+          [date.call(first.shift),date.call(second.shift)]
+        end.flatten.join(' ')
       end
 
       def unflammable(first, second)
