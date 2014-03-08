@@ -99,11 +99,11 @@ module Hiroshima5374::AreaDays
       end
 
       def resource(first,second)
-        '20150101'
+        two_week_base(first,second)
       end
 
       def area(tds)
-        tds[14].children.map do |element|
+        tds.shift.children.map do |element|
           case element
           when Nokogiri::XML::Text
             element.text.strip
@@ -114,19 +114,29 @@ module Hiroshima5374::AreaDays
       end
 
       def etc(first, second)
-        '20150101'
+        two_week_base(first, second)
       end
 
       def big(first, second)
         '20150101'
       end
 
-      def etc(first, second)
+      def unflammable(first, second)
         '20150101'
       end
 
-      def unflammable(first, second)
-        '20150101'
+      def two_week_base(first, second)
+        n_week = first.shift.text.gsub(/[^[:digit:]]/,'')
+        week_day = first.shift.text.strip
+
+        12.times do
+          first.shift
+          second.shift
+        end
+
+        n_week.each_char.map do |n|
+          "#{week_day}#{n}"
+        end.join(' ')
       end
   end
 end

@@ -27,5 +27,15 @@ describe Parser do
       petbottle = subject.first[3]
       expect(petbottle).to eq('火')
     end
+
+    it 'resource' do
+      resource = subject.first[5]
+      expect(resource).to eq('水2 水4')
+    end
+
+    it 'etc' do
+      etc = subject.first[7]
+      expect(etc).to eq('水1 水3')
+    end
   end
 end
