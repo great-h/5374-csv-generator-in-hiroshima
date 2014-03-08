@@ -5,7 +5,8 @@ module Hiroshima5374::AreaDays
   class Parser
     WEEK_DAYS = '月火水木金土日'.freeze
 
-    def initialize(file)
+    def initialize(ward, file)
+      @ward = ward
       @file = file
       @flammable_count = 0
       @petbottle_count = 0
@@ -109,7 +110,7 @@ module Hiroshima5374::AreaDays
           when Nokogiri::XML::Element
             ' '
           end
-        end.join
+        end.unshift("#{@ward} ").join
       end
 
       def etc(first, second)

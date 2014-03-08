@@ -4,7 +4,7 @@ include Hiroshima5374::AreaDays
 
 describe Parser do
   describe '#areas' do
-    subject { Parser.new(sample_html).areas }
+    subject { Parser.new('中区', sample_html).areas }
     it('10 rows') { expect(subject.size).to eq(10) }
     it '10x10' do
       counts = subject.map do |area|
@@ -15,7 +15,7 @@ describe Parser do
 
     it 'area' do
       flammbale = subject.first[0]
-      expect(flammbale).to eq('舟入南2丁目、3丁目、6丁目 西川口町')
+      expect(flammbale).to eq('中区 舟入南2丁目、3丁目、6丁目 西川口町')
     end
 
     it 'flammable' do

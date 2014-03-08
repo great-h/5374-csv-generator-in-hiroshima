@@ -14,7 +14,7 @@ describe CSVCreator do
   end
 
   describe '#create' do
-    subject { CSVCreator.new([sample_html]).create }
+    subject { CSVCreator.new([['区',sample_html]]).create }
     it 'area_days.csv が作成される' do
       subject
       expect(File.exist?(csv_file)).to be_true
