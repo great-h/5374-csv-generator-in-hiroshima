@@ -136,7 +136,8 @@ module Hiroshima5374::AreaDays
       end
 
       def unflammable(first, second)
-        '20150101'
+        first.shift # 収集地区を読み飛ばし
+        two_week_base(first,second)
       end
 
       def two_week_base(first, second)
