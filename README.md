@@ -1,29 +1,21 @@
-# 5374::Csv::Generator::In::Hiroshima
+# これは何?
 
-TODO: Write a gem description
+[5374.jp](http://5374.jp/) の[広島版](http://hiroshima.5374.jp/)の csv ファイルを作成するスクリプトです。
 
-## Installation
+このスクリプトは `area_days.csv` と `target.csv` を生成します。
 
-Add this line to your application's Gemfile:
+# 使い方
 
-    gem '5374-csv-generator-in-hiroshima'
+```
+$ git clone git@github.com:great-h/5374-csv-generator-in-hiroshima.git
+$ rake install
+```
 
-And then execute:
+# 提供されるコマンド
 
-    $ bundle
+* create_5734_csv - area_days.csv と target.csv を作成します。
+* create_area_days_csv - area_days.csv を作成します。
+* create_target_csv - target.csv を作成します。
 
-Or install it yourself as:
-
-    $ gem install 5374-csv-generator-in-hiroshima
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it ( http://github.com/<my-github-username>/5374-csv-generator-in-hiroshima/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+情報源は広島市のサイトから取得しています。
+[詳細はWikiに記載しています。](https://github.com/great-h/5374/wiki)
