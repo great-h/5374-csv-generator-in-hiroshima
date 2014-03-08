@@ -69,12 +69,17 @@ module Hiroshima5374::AreaDays
 
       def flammable(tds)
         if @flammable_count == 0
-          @flammable = tds[0]
-          @flammable_count = @flammable.attributes["rowspan"].value.to_i / 2
+          flammable = tds[0]
+          @flammable_count = flammable.attributes["rowspan"].value.to_i / 2
+          @flammable = flammable.text.gsub(/曜日/,'')
+            .gsub(/[^月火水木金土日]/,'')
+            .each_char
+            .to_a
+            .join(' ')
           tds.shift
         end
         @flammable_count -= 1
-        @flammable.text
+        @flammable
       end
     end
 

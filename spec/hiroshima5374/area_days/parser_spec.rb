@@ -12,5 +12,10 @@ describe Parser do
       end
       expect(counts.reduce(:+)).to eq(100)
     end
+
+    it 'flammable' do
+      flammbale = subject.first[2]
+      expect(flammbale).to eq('月 木')
+    end
   end
 end
