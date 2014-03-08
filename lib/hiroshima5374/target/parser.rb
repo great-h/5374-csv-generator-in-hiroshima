@@ -31,19 +31,24 @@ module Hiroshima5374::Target
         name = name(tds)
         type = type(tds)
         notice = notice(type, tds)
-        [
+
+        ret = [
          type,
          name,
          notice,
          furigana
         ]
+        p ret if $DEBUG
+        ret
       }
     end
 
     def furigana(tds)
       if @furigana_count == 0
         td = tds.shift
-        @furigana_count = td.attributes["rowspan"].value.to_i
+        @furigana_count = 1
+        rowspan = td.attributes["rowspan"]
+        @furigana_count = rowspan.value.to_i if rowspan
         @furigana = td.text.strip
       end
       @furigana_count -= 1
@@ -64,7 +69,7 @@ module Hiroshima5374::Target
         td = tds.shift
       end
       @name_count -= 1
-      [@main_name, td.text.strip].join(' ')
+      [@main_name, td.text.tr("\r\n ",'')].join(' ')
     end
 
     def type(tds)
@@ -82,10 +87,13 @@ module Hiroshima5374::Target
     def notice(type, tds)
       if @way_count == 0
         td = tds.shift
-        rowspan = td.attributes["rowspan"]
         @way_count = 1
-        @way_count = rowspan.value.to_i if rowspan
-        @way = td.text.tr("\r\n ",'')
+        @way = ''
+        if td
+          rowspan = td.attributes["rowspan"]
+          @way_count = rowspan.value.to_i if rowspan
+          @way = td.text.tr("\r\n ",'')
+        end
       end
       @way_count -= 1
 
@@ -101,11 +109,12 @@ module Hiroshima5374::Target
       notice = case type
                when '大型ゴミ'
                  @notice
-               when '不燃ゴミ','資源ゴミ','その他プラ','有害ゴミ','リサイクルプラ','可燃ゴミ'
+               when '不燃ゴミ','資源ゴミ','その他プラ','有害ゴミ','リサイクルプラ','可燃ゴミ','ペットボトル'
                  @way + @notice
-               when '家電リサイクル法対象機器','―'
+               when '家電リサイクル法対象機器','―','---',' ',"品目「将棋盤・碁盤」に掲載しています。  ",' ---','品目「かばん」に掲載しています。'
                  ''
                else
+                 p type
                  raise "予期しないタイプ #{type}"
                end
       notice unless notice.size == 0
@@ -114,11 +123,26 @@ module Hiroshima5374::Target
     def ignore_tr?(tr)
       tds = tr.children
       ignore_colors = ["#e7e7e7","#ffffff"]
-      bgcolor = tds.first.attributes["bgcolor"].value
-      return true if ignore_colors.include? bgcolor
 
-      bgcolor = tds[2].attributes["bgcolor"].value
-      return true if ignore_colors.include? bgcolor
+      td = tds.first
+      colspan = td.attributes["colspan"]
+      if colspan
+        return true if colspan.value.to_i > 2
+      end
+
+      bgcolor = td.attributes["bgcolor"]
+      return false if bgcolor.nil?
+      return true if ignore_colors.include? bgcolor.value
+
+      tds2 = tds[2]
+      return false if tds2.nil?
+
+      attributes = tds2.attributes
+      return false if attributes.empty?
+
+      bgcolor = attributes["bgcolor"]
+      return false if bgcolor.nil?
+      ignore_colors.include? bgcolor.value
     end
   end
 end

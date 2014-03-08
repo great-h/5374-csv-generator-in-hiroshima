@@ -9,8 +9,8 @@ module Hiroshima5374::Target
     "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277274582025/index.html",
     "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277277472954/index.html",
     "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277363424007/index.html",
-    "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277431455385/index.htmla",
-    "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277431508075/index.html#ya",
+    "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277431455385/index.html",
+    "http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1277431508075/index.html",
   ]
 
   class CSVCreator
