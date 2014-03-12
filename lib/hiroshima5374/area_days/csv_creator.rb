@@ -7,7 +7,7 @@ module Hiroshima5374::AreaDays
     ["中区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359632161939/index.html"], # 中区1
     ["中区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359372094205/index.html"], # 中区2
     ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604219035/index.html"], # 東区1
-    ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604219035/index.html"], # 東区2
+    ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604380371/index.html"], # 東区2
     ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604516583/index.html"], # 旧安芸町
     ["南区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604623155/index.html"], # 南区1
     ["南区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604737620/index.html"], # 南区2
