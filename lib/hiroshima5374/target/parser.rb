@@ -97,12 +97,14 @@ module Hiroshima5374::Target
       end
       @way_count -= 1
 
-      if @notice_count == 0
+      if @notice_count <= 0
         td = tds.shift
-        rowspan = td.attributes["rowspan"]
-        @notice_count = rowspan.value.to_i if rowspan
-        @notice = td.text.tr("\r\n ",'')
-        @notice = '' if @notice.size == 1
+        if td
+          rowspan = td.attributes["rowspan"]
+          @notice_count = rowspan.value.to_i if rowspan
+          @notice = td.text.tr("\r\n ",'')
+          @notice = '' if @notice.size == 1
+        end
       end
       @notice_count -= 1
 
