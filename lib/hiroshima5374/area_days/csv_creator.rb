@@ -4,7 +4,7 @@ require 'hiroshima5374/area_days/parser'
 
 module Hiroshima5374::AreaDays
   HTML_FILES = [
-    ["中区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359632161939/index.html"], # 中区1
+    ["中区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359367387230/index.html"], # 中区1
     ["中区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359372094205/index.html"], # 中区2
     ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604219035/index.html"], # 東区1
     ["東区","http://www.city.hiroshima.lg.jp/www/contents/0000000000000/1359604380371/index.html"], # 東区2
