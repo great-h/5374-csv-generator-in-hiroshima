@@ -25,22 +25,29 @@ module Hiroshima5374::AreaDays
       parse_trs(nodesets).map do |first,second,third,fourth|
         flammable = flammable(first)
         petbottle = petbottle(first)
-        resource = resource(first,second)
+        resource = []
+        resource_display = resource_display(first,second)
         area = area(first)
-        etc = etc(first,second)
+        etc = []
+        etc_display = etc_display(first,second)
         big = big(third,fourth)
-        unflammable = unflammable(third,fourth)
+        unflammable = []
+        unflammable_display = unflammable_display(third,fourth)
         [
          area,
          nil, # center
          flammable,
          petbottle,
          petbottle,
+         resource_display,
+         resource_display,
+         etc_display,
+         big,
+         unflammable_display,
          resource,
          resource,
          etc,
-         big,
-         unflammable
+         unflammable,
         ]
       end
     end
@@ -98,7 +105,7 @@ module Hiroshima5374::AreaDays
         @petbottle
       end
 
-      def resource(first,second)
+      def resource_display(first,second)
         two_week_base(first,second)
       end
 
@@ -113,7 +120,7 @@ module Hiroshima5374::AreaDays
         end.unshift("#{@ward} ").join
       end
 
-      def etc(first, second)
+      def etc_display(first, second)
         two_week_base(first, second)
       end
 
@@ -135,7 +142,7 @@ module Hiroshima5374::AreaDays
         end.flatten.push('*1').join(' ')
       end
 
-      def unflammable(first, second)
+      def unflammable_display(first, second)
         first.shift # 収集地区を読み飛ばし
         two_week_base(first,second)
       end
