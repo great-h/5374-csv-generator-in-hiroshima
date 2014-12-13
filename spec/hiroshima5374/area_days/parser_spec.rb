@@ -29,7 +29,7 @@ describe AreaDays::Parser do
     end
 
     it 'resource' do
-      resource = subject.first[5]
+      resource = subject.first[10]
       text = resource[0..1].join(" ")
       expect(text).to eq('20140410 20140424')
     end
@@ -40,8 +40,8 @@ describe AreaDays::Parser do
     end
 
     it 'etc' do
-      etc = subject.first[7]
-      text = text[0..1].join(" ")
+      etc = subject.first[12]
+      text = etc[0..1].join(" ")
       expect(text).to eq('20140403 20140417')
     end
 
@@ -56,9 +56,9 @@ describe AreaDays::Parser do
     end
 
     it 'unflammable' do
-      unflammable = subject.first[9]
+      unflammable = subject.first[13]
       text = unflammable[0..1].join(" ")
-      expect(unflammable).to eq('20140405 20140419')
+      expect(text).to eq('20140405 20140419')
     end
 
     it 'unflammable_display' do
