@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'hiroshima5374/area_days/areaday'
 
 module Hiroshima5374::AreaDays
   class Parser
@@ -23,29 +24,15 @@ module Hiroshima5374::AreaDays
       raise "予期しないHTMLです" unless nodesets.count == 3
 
       parse_trs(nodesets).map do |first,second,third,fourth|
-        flammable = flammable(first)
-        petbottle = petbottle(first)
-        resource_display, resource = *resource(first,second)
-        area = area(first)
-        etc_display, etc = etc(first,second)
-        big = big(third,fourth)
-        unflammable_display, unflammable = unflammable(third,fourth)
-        [
-         area,
-         nil, # center
-         flammable,
-         petbottle,
-         petbottle,
-         resource_display,
-         resource_display,
-         etc_display,
-         big,
-         unflammable_display,
-         resource,
-         resource,
-         etc,
-         unflammable,
-        ]
+        day = Areaday.new
+        day.flammable = flammable(first)
+        day.petbottle = petbottle(first)
+        day.resource_display, day.resource = *resource(first,second)
+        day.area = area(first)
+        day.etc_display, day.etc = etc(first,second)
+        day.big = big(third,fourth)
+        day.unflammable_display, day.unflammable = unflammable(third,fourth)
+        day
       end
     end
 
