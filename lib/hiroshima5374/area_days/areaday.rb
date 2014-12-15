@@ -4,17 +4,20 @@ module Hiroshima5374::AreaDays
     attr_accessor :etc, :etc_display, :big, :unflammable, :unflammable_display
 
     def to_a
+      r = resource.join(" ") + " " + resource_display
+      e = etc.join(" ") + " " + etc_display
+      u = unflammable.join(" ") + " " + unflammable_display
       [
        area,
        nil, # center
        flammable,
        petbottle,
        petbottle,
-       resource.join(" "),
-       resource.join(" "),
-       etc.join(" "),
+       r,
+       r,
+       e,
        big,
-       unflammable.join(" "),
+       u,
       ]
     end
   end
