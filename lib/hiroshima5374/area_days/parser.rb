@@ -25,22 +25,26 @@ module Hiroshima5374::AreaDays
       parse_trs(nodesets).map do |first,second,third,fourth|
         flammable = flammable(first)
         petbottle = petbottle(first)
-        resource = resource(first,second)
+        resource_display, resource = *resource(first,second)
         area = area(first)
-        etc = etc(first,second)
+        etc_display, etc = etc(first,second)
         big = big(third,fourth)
-        unflammable = unflammable(third,fourth)
+        unflammable_display, unflammable = unflammable(third,fourth)
         [
          area,
          nil, # center
          flammable,
          petbottle,
          petbottle,
+         resource_display,
+         resource_display,
+         etc_display,
+         big,
+         unflammable_display,
          resource,
          resource,
          etc,
-         big,
-         unflammable
+         unflammable,
         ]
       end
     end
@@ -118,18 +122,12 @@ module Hiroshima5374::AreaDays
       end
 
       def big(first, second)
-        time = Time.now
-        month = time.month
-        year = time.year
-        if month < 4
-          year -= 1
-        end
-        months = (4..12).to_a + (1..3).to_a
+        year, months = *get_yearmonth
         months.map do |n|
           year += 1 if n == 1
           date = proc do |day|
             day = day.text.gsub(/[^[:digit:]]/,'')
-            Time.new(year,n,day).strftime("%Y%m%d")
+            dayformat(year,n,day)
           end
           [date.call(first.shift),date.call(second.shift)]
         end.flatten.push('*1').join(' ')
@@ -143,15 +141,35 @@ module Hiroshima5374::AreaDays
       def two_week_base(first, second)
         n_week = first.shift.text.gsub(/[^[:digit:]]/,'')
         week_day = first.shift.text.strip
+        days = []
 
-        12.times do
-          first.shift
-          second.shift
+        year,months = *get_yearmonth
+        months.each do |month|
+          day = first.shift.text.gsub(/[^[:digit:]]/,'').to_i
+          days << dayformat(year,month,day)
+          day2 = second.shift.text.gsub(/[^[:digit:]]/,'')
+          days << dayformat(year,month,day2)
         end
 
-        n_week.each_char.map do |n|
+        display = n_week.each_char.map do |n|
           "#{week_day}#{n}"
         end.join(' ')
+        [display,days]
+      end
+
+      def get_yearmonth
+        time = Time.now
+        month = time.month
+        year = time.year
+        if month < 4
+          year -= 1
+        end
+        months = (4..12).to_a + (1..3).to_a
+        [year,months]
+      end
+
+      def dayformat(year,month,day)
+        Time.new(year,month,day).strftime("%Y%m%d")
       end
   end
 end

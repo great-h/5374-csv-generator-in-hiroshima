@@ -6,11 +6,11 @@ describe AreaDays::Parser do
   describe '#areas' do
     subject { AreaDays::Parser.new('中区', area_days_sample_html).areas }
     it('10 rows') { expect(subject.size).to eq(10) }
-    it '10x10' do
+    it '14x10' do
       counts = subject.map do |area|
         area.count
       end
-      expect(counts.reduce(:+)).to eq(100)
+      expect(counts.reduce(:+)).to eq(140)
     end
 
     it 'area' do
@@ -29,21 +29,39 @@ describe AreaDays::Parser do
     end
 
     it 'resource' do
+      resource = subject.first[10]
+      text = resource[0..1].join(" ")
+      expect(text).to eq('20140410 20140424')
+    end
+
+    it 'resource_display' do
       resource = subject.first[5]
       expect(resource).to eq('水2 水4')
     end
 
     it 'etc' do
+      etc = subject.first[12]
+      text = etc[0..1].join(" ")
+      expect(text).to eq('20140403 20140417')
+    end
+
+    it 'etc_disploy' do
       etc = subject.first[7]
       expect(etc).to eq('水1 水3')
     end
 
     it 'big' do
       big = subject.first[8]
-      expect(big).to eq('20130412 20130426 20130510 20130524 20130614 20130628 20130712 20130726 20130809 20130823 20130913 20130927 20131011 20131025 20131108 20131122 20131213 20131227 20140110 20140124 20140214 20140228 20140314 20140328 *1')
+      expect(big).to eq('20140412 20140426 20140510 20140524 20140614 20140628 20140712 20140726 20140809 20140823 20140913 20140927 20141011 20141025 20141108 20141122 20141213 20141227 20150110 20150124 20150214 20150228 20150314 20150328 *1')
     end
 
     it 'unflammable' do
+      unflammable = subject.first[13]
+      text = unflammable[0..1].join(" ")
+      expect(text).to eq('20140405 20140419')
+    end
+
+    it 'unflammable_display' do
       unflammable = subject.first[9]
       expect(unflammable).to eq('金1 金3')
     end
