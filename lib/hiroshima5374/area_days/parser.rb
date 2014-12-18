@@ -132,10 +132,15 @@ module Hiroshima5374::AreaDays
 
         year,months = *get_yearmonth
         months.each do |month|
+          if (1..3).include?(month)
+            _year = year+1
+          else
+            _year = year
+          end
           day = first.shift.text.gsub(/[^[:digit:]]/,'').to_i
-          days << dayformat(year,month,day)
+          days << dayformat(_year,month,day)
           day2 = second.shift.text.gsub(/[^[:digit:]]/,'')
-          days << dayformat(year,month,day2)
+          days << dayformat(_year,month,day2)
         end
 
         display = n_week.each_char.map do |n|
