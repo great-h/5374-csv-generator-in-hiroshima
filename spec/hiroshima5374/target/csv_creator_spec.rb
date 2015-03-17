@@ -21,7 +21,7 @@ describe Target::CSVCreator do
     subject { Target::CSVCreator.new([target_sample_html]).create }
     it 'target.csv が作成される' do
       subject
-      expect(File.exist?(csv_file)).to be_true
+      expect(File.exist?(csv_file)).to eq(true)
     end
   end
 end

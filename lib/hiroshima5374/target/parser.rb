@@ -116,14 +116,13 @@ module Hiroshima5374::Target
                when '家電リサイクル法対象機器','―','---',' ',"品目「将棋盤・碁盤」に掲載しています。  ",' ---','品目「かばん」に掲載しています。'
                  ''
                else
-                 p type
-                 raise "予期しないタイプ #{type}"
+                 raise "#{@file} に予期しないタイプ #{type} がありました。"
                end
       notice unless notice.size == 0
     end
 
     def ignore_tr?(tr)
-      tds = tr.children
+      tds = tr.css('td')
       ignore_colors = ["#e7e7e7","#ffffff"]
 
       td = tds.first
