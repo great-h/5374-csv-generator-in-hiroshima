@@ -6,9 +6,10 @@ module Hiroshima5374::AreaDays
   class Parser
     WEEK_DAYS = '月火水木金土日'.freeze
 
-    def initialize(ward, file)
+    def initialize(ward, file, year)
       @ward = ward
       @file = file
+      @year = year
       @flammable_count = 0
       @petbottle_count = 0
     end
@@ -109,7 +110,8 @@ module Hiroshima5374::AreaDays
       end
 
       def big(first, second)
-        year, months = *get_yearmonth
+        months = *get_months
+        year = @year
         months.map do |n|
           year += 1 if n == 1
           date = proc do |day|
@@ -130,12 +132,12 @@ module Hiroshima5374::AreaDays
         week_day = first.shift.text.strip
         days = []
 
-        year,months = *get_yearmonth
+        months = get_months
         months.each do |month|
           if (1..3).include?(month)
-            _year = year+1
+            _year = @year+1
           else
-            _year = year
+            _year = @year
           end
           day = first.shift.text.gsub(/[^[:digit:]]/,'').to_i
           days << dayformat(_year,month,day)
@@ -149,15 +151,8 @@ module Hiroshima5374::AreaDays
         [display,days]
       end
 
-      def get_yearmonth
-        time = Time.now
-        month = time.month
-        year = time.year
-        if month < 4
-          year -= 1
-        end
-        months = (4..12).to_a + (1..3).to_a
-        [year,months]
+      def get_months
+        (4..12).to_a + (1..3).to_a
       end
 
       def dayformat(year,month,day)

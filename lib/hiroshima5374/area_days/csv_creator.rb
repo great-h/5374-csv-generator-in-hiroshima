@@ -4,6 +4,7 @@ require 'fileutils'
 require 'hiroshima5374/area_days/parser'
 
 module Hiroshima5374::AreaDays
+  YEAR = 2016
   HTML_FILES = [
     ["中区","http://www.city.hiroshima.lg.jp/www/contents/1456144057695/index.html"], # 中区1
     ["中区","http://www.city.hiroshima.lg.jp/www/contents/1456144459889/index.html"], # 中区2
@@ -28,12 +29,13 @@ module Hiroshima5374::AreaDays
   class CSVCreator
     class << self
       def create
-        new(HTML_FILES).create
+        new(HTML_FILES, YEAR).create
       end
     end
 
-    def initialize(files)
+    def initialize(files, year)
       @html_files = files
+      @year = year
     end
 
     def create
@@ -41,7 +43,7 @@ module Hiroshima5374::AreaDays
       CSV.open(filename,'wb') do |csv|
         csv << header
         @html_files.each do |ward, file|
-          Parser.new(ward, file).each do |area|
+          Parser.new(ward, file, @year).each do |area|
             csv << area.to_a
           end
         end
