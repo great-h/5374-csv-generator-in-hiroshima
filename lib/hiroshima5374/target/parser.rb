@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'nokogiri'
 
 module Hiroshima5374::Target
@@ -78,7 +79,7 @@ module Hiroshima5374::Target
         rowspan = td.attributes["rowspan"]
         @type_count = 1
         @type_count = rowspan.value.to_i if rowspan
-        @type_name = td.text.tr("\r\n ",'').gsub('ごみ','ゴミ')
+        @type_name = td.text.tr("\r\n ",'').gsub('ゴミ', 'ごみ')
       end
       @type_count -= 1
       @type_name
@@ -109,9 +110,9 @@ module Hiroshima5374::Target
       @notice_count -= 1
 
       notice = case type
-               when '大型ゴミ'
+               when '大型ごみ'
                  @notice
-               when '不燃ゴミ','資源ゴミ','その他プラ','有害ゴミ','リサイクルプラ','可燃ゴミ','ペットボトル'
+               when '不燃ごみ','資源ごみ','その他プラ','有害ごみ','リサイクルプラ','可燃ごみ','ペットボトル'
                  @way + @notice
                when '家電リサイクル法対象機器','―','---',' ',"品目「将棋盤・碁盤」に掲載しています。  ",' ---','品目「かばん」に掲載しています。'
                  ''
